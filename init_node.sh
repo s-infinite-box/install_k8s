@@ -17,9 +17,6 @@ fi
 os=$(cat /etc/issue)
 printf "\n current os info: \n%s\n" "$os"
 
-master_ip=$(ip a | grep -P -o '172\.17\.[0-9.]{4,8}(?=\/)' | awk 'END{printf $1}')
-# master_ip=114.67.233.242
-
 printf "\nHOSTNAME: %s, master_ip: %s\n" "$HOSTNAME" "$master_ip"
 
 printf "\n### systemctl disable ufw\n"

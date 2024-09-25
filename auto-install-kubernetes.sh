@@ -26,13 +26,18 @@ case $get_kube_type in
     . install_kube_bin.sh
     ;;
   *)
-    echo '\033[31;1m WARNING: get_kube_type is empty, get kube by bin'
-    . install_kube_bin.sh
+    echo -e '\033[31;1m WARNING: get_kube_type is empty, get kube by apt'
+    . install_kube_apt.sh
     ;;
 esac
 
 case $init_type in
-  bin|BIN|systemd)
+  bin|systemd)
+    if [ $get_kube_type != "bin" ]
+    then
+      echo -e '\033[31;1m WARNING: init_type is bin, but get_kube_type not bin, exit''
+      exit 1
+    fi
     . init_cluster_by_systemd.sh
   ;;
   kubeadm)
